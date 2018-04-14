@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="src/react.js"></script>
+    <script src="src/browser-min.js"></script>
+    <script src="src/react-dom.js"></script>
+    <title>React</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="stage1"></div>
+<div id="stage2"></div>
+<div id="stage3"></div>
+<script type="text/babel">
+    var log=console.log.bind(this)
+
+    window.addEventListener('click',function (e) {
+        log(e.clientX)
+        log(e.clientY)
+    })
+
+    class Stage1 extends React.Component{
+        constructor(props){
+            super(props)
+        }
+        render(){
+            return(<div style={{
+                position:'relative',
+                width:window.outerWidth,
+                height:window.outerHeight,
+                backgroundColor:'black',
+                backgroundImage:'url(img/1.jpg)',
+//                backgroundRepeat:'no-repeat',
+                padding:0,
+                margin:0,
+                border:'none',
+            }}>
+                <div style={{
+                    fontSize:'100px',
+                    position:'absolute',
+                    top:'40%',
+                    left:'35%',
+                    margin: 0,
+                    padding:0,
+                }}>First Page</div>
+            </div>)
+        }
+    }
+
+    class Stage2 extends React.Component{
+        constructor(props){
+            super(props)
+        }
+        render(){
+            return(<div style={{
+                position:'relative',
+                width:window.outerWidth,
+                height:window.outerHeight,
+                backgroundColor:'black',
+                backgroundImage:'url(img/2.jpg)',
+//                backgroundRepeat:'no-repeat',
+                padding:0,
+                margin:0,
+                border:'none',
+
+            }}>
+                <div style={{
+                    fontSize:'100px',
+                    position:'absolute',
+                    top:'40%',
+                    left:'35%',
+                    margin: 0,
+                    padding:0,
+                }}>Second Page</div>
+            </div>)
+        }
+    }
+    class Stage3 extends React.Component{
+        constructor(props){
+            super(props)
+        }
+        render(){
+            return(<div style={{
+                position:'relative',
+                width:window.outerWidth,
+                height:window.outerHeight,
+                backgroundColor:'black',
+                backgroundImage:'url(img/3.jpg)',
+//                backgroundRepeat:'no-repeat',
+                padding:0,
+                margin:0,
+                border:'none',
+            }}>
+                <div style={{
+                    fontSize:'100px',
+                    position:'absolute',
+                    top:'40%',
+                    left:'35%',
+                    margin: 0,
+                    padding:0,
+                }}>Third Page</div>
+            </div>)
+        }
+    }
+    class Flow extends React.Component{
+        constructor(props){
+            super(props)
+        }
+        render(){
+
+        }
+    }
+    class Icon extends React.Component{
+        constructor(props){
+            super(props)
+        }
+    }
+
+    ReactDOM.render(<Stage1/>,stage1)
+    ReactDOM.render(<Stage2/>,stage2)
+    ReactDOM.render(<Stage3/>,stage3)
+</script>
+</body>
+</html>
