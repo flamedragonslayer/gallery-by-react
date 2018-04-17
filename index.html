@@ -14,6 +14,7 @@
     </style>
 </head>
 <body>
+<div id="navi"></div>
 <div id="stage1"></div>
 <div id="stage2"></div>
 <div id="stage3"></div>
@@ -108,12 +109,81 @@
             </div>)
         }
     }
-    class Flow extends React.Component{
+    class Navi extends React.Component{
         constructor(props){
             super(props)
         }
         render(){
-
+            return(
+                <nav style={{
+                    zIndex:10,
+                    height:'50px',
+                    width:window.outerWidth,
+                    position:'absolute',
+                    textAlign:'center',
+                }}>
+                    <SubNavi num="0"/>
+                    <SubNavi num="1"/>
+                    <SubNavi num="2"/>
+                </nav>
+            )
+        }
+    }
+    class SubNavi extends React.Component {
+        constructor(props) {
+            super(props)
+            this.handleClick = this.handleClick.bind(this);
+            this.handleMouseEnter = this.handleMouseEnter.bind(this);
+            this.handleMouseLeave = this.handleMouseLeave.bind(this);
+            this.state={
+                style:{
+                    fontSize:'30px',
+                    fontWeight:'bold',
+                    opacity:0.9,
+                    display:'inline-block',
+                    textAlign:'center',
+                    marginRight:'100px',
+                    marginLeft:'100px',
+                    marginTop:'50px',
+                },
+                name:['first','second','third'],
+                num:this.props.num ,
+            }
+        }
+        handleMouseEnter(e){
+            e.preventDefault();
+            e.stopPropagation();
+            this.setState({style:{
+                ...this.state.style ,
+                color:'red',
+                transition:'1s'
+            }})
+        }
+        handleMouseLeave(e){
+            e.preventDefault();
+            e.stopPropagation();
+            this.setState({style:{
+                ...this.state.style ,
+                color:'black',
+                transition:'1s'
+            }})
+        }
+        handleClick(e){
+            e.preventDefault();
+            e.stopPropagation();
+            if(this.state.num==0){
+                log(0)
+            }else if(this.state.num==1){
+                log(1)
+            }else if(this.state.num==2){
+                log(2)
+            }
+        }
+        render(){
+            return(<div style={this.state.style} onClick={this.handleClick}  onMouseEnter={this.handleMouseEnter}
+                        onMouseLeave={this.handleMouseLeave}>
+                {this.state.name[this.state.num]}
+            </div>)
         }
     }
     class Icon extends React.Component{
@@ -125,6 +195,7 @@
     ReactDOM.render(<Stage1/>,stage1)
     ReactDOM.render(<Stage2/>,stage2)
     ReactDOM.render(<Stage3/>,stage3)
+    ReactDOM.render(<Navi/>,navi)
 </script>
 </body>
 </html>
