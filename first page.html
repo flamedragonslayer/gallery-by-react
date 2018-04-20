@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First Page</title>
+    <script src="src/react.js"></script>
+    <script src="src/browser-min.js"></script>
+    <script src="src/react-dom.js"></script>
+    <style>
+        body{
+            margin:0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="stage"></div>
+<script type="text/babel">
+
+    class Stage extends React.Component{
+        constructor(props){
+            super(props)
+            this.state={arr:[],i:0,num:0,}
+        }
+        render(){
+            for(this.state.i=0;this.state.i<5;this.state.i++){
+                this.state.num=this.state.i+1
+                this.state.arr.push(<Box key={this.state.num} top={Math.ceil(this.state.num/3)*50}
+                left={(this.state.num%3)*50}/>)
+            }
+            return(<div style={{
+                width:window.innerWidth,
+                height:window.innerHeight,
+                backgroundColor:'rgba(228,255,200,0.54)',
+                position:'relative',
+            }}>
+                {this.state.arr}
+            </div>)
+        }
+    }
+    class Box extends React.Component{
+        constructor(props){
+            super(props)
+            this.state={top:this.props.top,left:this.props.left,}
+        }
+        render(){
+            return(<div style={{
+                width:'50px',
+                height:'50px',
+                margin:'50px',
+                backgroundColor:'lightgreen',
+                position:'absolute',
+                display:'inline-block',
+                top:this.state.top,
+                left:this.state.left,
+            }}>
+
+            </div>)
+        }
+    }
+
+    ReactDOM.render(<Stage/>,stage)
+
+</script>
+</body>
+</html>
