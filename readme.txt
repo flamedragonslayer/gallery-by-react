@@ -10,3 +10,16 @@
 5.在使用webstorm打字自动补充事件名称时，如鼠标时间onClick，软件会自动将其变为小写，导致react无法识别。
 
 6.在写触发事件来改变CSS样式时(这里指的是写在constructor中的style对象，并非内联在组件中的CSS样式)，请注意，因为JS的不可变性（immutabilty），对style对象的改变并不会添加到原来的style对象中，而是形成一个新的style对象。这也就意味着，如果不想改变太多的原来的样式，就需要复制一大堆代码。但是，这里可以使用展开运算符 ...来引用原style对象，节省很多工作量。
+
+7.数组的key属性，不能作为props传入到子组件中。
+
+8.不能在render里直接使用自己定义的函数，会报错
+比如，错误示例如下
+	class Abc ....{
+	  ...
+	  handleX(){...}
+	  render(){
+	    this.handleX
+	    return(...)  
+	  }	
+	}

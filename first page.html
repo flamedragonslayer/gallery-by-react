@@ -17,16 +17,23 @@
 <div id="stage"></div>
 <script type="text/babel">
 
+    var log=console.log.bind(this)
+
+    window.addEventListener('click',function (e) {
+        log(e.clientX)
+        log(e.clientY)
+    })
+
     class Stage extends React.Component{
         constructor(props){
             super(props)
             this.state={arr:[],i:0,num:0,}
         }
         render(){
-            for(this.state.i=0;this.state.i<5;this.state.i++){
+            for(this.state.i=0;this.state.i<9;this.state.i++){
                 this.state.num=this.state.i+1
-                this.state.arr.push(<Box key={this.state.num} top={Math.ceil(this.state.num/3)*50}
-                left={(this.state.num%3)*50}/>)
+                this.state.arr.push(<Box key={this.state.num} num={this.state.num} mtop={(Math.ceil(this.state.num/3))*200}
+                mleft={((this.state.num%3==2)?2:((this.state.num%3==1)?1:3))*200}/>)
             }
             return(<div style={{
                 width:window.innerWidth,
@@ -35,27 +42,76 @@
                 position:'relative',
             }}>
                 {this.state.arr}
+                <Addbox/>
             </div>)
         }
     }
     class Box extends React.Component{
         constructor(props){
             super(props)
-            this.state={top:this.props.top,left:this.props.left,}
+            this.state={
+                style:{
+                    width:'60px',
+                    height:'80px',
+                    backgroundColor:'lightgreen',
+//                position:'absolute',
+                    display:'inline-block',
+//                marginTop:this.state.mtop,
+//                marginLeft:this.state.mleft,
+                    marginTop:'200px',
+                    marginLeft:'200px',
+                },
+                num:this.props.num,
+                mtop:this.props.mtop,
+                mleft:this.props.mleft,
+            }
+            this.handleClick=this.handleClick.bind(this)
+        }
+        handleClick(e){
+            e.preventDefault()
+            e.stopPropagation()
+            log(this.state.left,this.state.top)
+            log(this.state.num)
+        }
+        componentWillMount(){
         }
         render(){
-            return(<div style={{
-                width:'50px',
-                height:'50px',
-                margin:'50px',
-                backgroundColor:'lightgreen',
-                position:'absolute',
-                display:'inline-block',
-                top:this.state.top,
-                left:this.state.left,
-            }}>
+            return(<div style={this.state.style} onClick={this.handleClick}>
 
             </div>)
+        }
+    }
+
+    class Addbox extends React.Component{
+        constructor(props){
+            super(props)
+            this.handleClick=this.handleClick.bind(this)
+            this.state={style:{
+                    width:'60px',
+                    height:'80px',
+                    backgroundColor:'lightgray',
+                    display:'inline-block',
+                    marginTop:'200px',
+                    marginLeft:'200px',
+                    backgroundImage:'url(img/addbox.png)',
+                    transition:'0.5s',
+                }
+            }
+        }
+        handleClick(e){
+            e.preventDefault()
+            e.stopPropagation()
+            this.setState({style:{
+                ...this.state.style ,
+                backgroundColor:'lightgreen',
+                backgroundImage:'',
+            }})
+        }
+        render(){
+            return(
+                <div style={this.state.style} onClick={this.handleClick}>
+                </div>
+            )
         }
     }
 
